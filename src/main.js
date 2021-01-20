@@ -1,9 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
-import vuetify from './plugins/vuetify';
+import vuetify from './plugins/vuetify'
+import VueFirestore from 'vue-firestore'
+require('firebase/firestore')
 
 Vue.config.productionTip = false
+Vue.use(VueFirestore)
 
 new Vue({
   router,

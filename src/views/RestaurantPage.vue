@@ -1,25 +1,26 @@
 <template>
-<div>
-<div v-for= "restaurant in Restaurant" :key="restaurant.id">
-{{restaurant.RestaurantName}}
-<v-img :src="restaurant.Menu"></v-img>
-</div>
+<div data-app> 
+<QueueDisplay v-bind:RestaurantId = "RestaurantId" />
+<GetTicketBtn v-bind:RestaurantId = "RestaurantId"/>
 </div>
 </template>
 
 <script>
-import { db,} from '../firebase';
+
+import QueueDisplay from '../components/QueueDisplay'
+import GetTicketBtn from '../components/GetTicketBtn'
 
 export default {
-    data(){
-        return{
-            RestaurantId: this.$route.params.RestaurantId,
-            }
-    },
-    firestore(){
-      return {
-        Restaurant: db.collection('Restaurant'),
-      }
-},
+  name: "RestaurantPage",
+  components: {
+    QueueDisplay,
+    GetTicketBtn,
+  },
+  data(){
+    return{
+      RestaurantId: this.$route.params.RestaurantId
+    }
+  }
 }
 </script>
+

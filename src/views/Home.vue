@@ -14,7 +14,7 @@
     label="Enter RestaurantId Here"
     :rules="rules"
     hide-details="auto"
-    v-model="RestaurantId"
+    v-model="UserInput"
     >
     </v-text-field>
     <v-btn
@@ -38,12 +38,11 @@ export default {
           return pattern.test(value) || 'Numbers Only'
         }
       ],
-      Code:"",
-      RestaurantId:"",
+      UserInput:"",
     }),
     methods: {
       ToRestaurantPage(){
-        this.$router.push({ name: 'RestaurantPage', params: { RestaurantId: this.RestaurantId}})
+        this.$router.push({ name: 'RestaurantPage', params: { RestaurantId: this.UserInput}})
       }
     }
   }

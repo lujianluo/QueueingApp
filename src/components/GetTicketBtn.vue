@@ -57,31 +57,37 @@ export default {
         }
     },
     methods:{
-        UpdateQueue(NewNumber){
-            db.collection("Restaurant").doc(this.RestaurantId).collection("QueueInfo").doc(this.SelectedSlot).update({
-                Issued: firebase.firestore.FieldValue.increment(1),
-                Waiting: firebase.firestore.FieldValue.increment(1),
-            });
-            db.collection("Restaurant").doc(this.RestaurantId).collection("QueueRecord").add({
-                Contact: this.UserInput,
-                Identifier: this.SelectedSlot,
-                QueueNumber: NewNumber
-            })
-        },
-        LoadSlotInfo(SlotId){
-            db.collection("Restaurant").doc(this.RestaurantId).collection("QueueInfo").doc(SlotId)
+       SubmitQueue(){
+            var vm = this;
+            db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueRecord")
+            .where("Contact", "==", vm.UserInput).where("Status", "==", "Processing")
             .get()
-            .then((Snapshot) =>{
-                    const SelectedIssued = Snapshot.data().Issued +=1;
-                    this.UpdateQueue(SelectedIssued)
-
-            })
-            .catch(function(error) {
-                console.log("Error getting documents: ", error);
-            })          
-        },
-        SubmitQueue(){
-            this.LoadSlotInfo(this.SelectedSlot)
+            .then(function(querySnapshot){
+                if (querySnapshot.size != 0){
+                    alert ("you can only queue for one restaurant at a time!")
+                }   else{
+                    db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueInfo").doc(vm.SelectedSlot)
+                    .get()
+                    .then((Snapshot) =>{
+                        const NewNumber = Snapshot.data().Issued +=1;
+                        db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueInfo").doc(vm.SelectedSlot).update({
+                            Issued: firebase.firestore.FieldValue.increment(1),
+                            Waiting: firebase.firestore.FieldValue.increment(1),
+                        });
+                        db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueRecord").add({
+                            Contact: vm.UserInput,
+                            Identifier: vm.SelectedSlot,
+                            QueueNumber: NewNumber,
+                            Status: "Processing",
+                        })
+                        alert("your Number is" + NewNumber)
+                    })
+                    .catch(function(error) {
+                        console.log("Error getting documents: ", error);
+                    })          
+                    }
+                })
+            this.dialog = false
         }
     },
 }

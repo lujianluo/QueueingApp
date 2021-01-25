@@ -26,6 +26,11 @@
                     @click="SubmitQueue">
                         Submit
                     </v-btn>
+                    <v-btn 
+                    text 
+                    @click="CloseDialog">
+                        Close
+                    </v-btn>
                 </v-card>
             </v-dialog>
         </v-row>        
@@ -53,42 +58,60 @@ export default {
             items: ['SlotA','SlotB','SlotC'],
             UserInput:"",
             SelectedSlot:"",
-            QueueInfo: [],
         }
     },
     methods:{
        SubmitQueue(){
-            var vm = this;
-            db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueRecord")
-            .where("Contact", "==", vm.UserInput).where("Status", "==", "Processing")
+             db.collection("Restaurant").doc(this.RestaurantId).collection("QueueInfo").doc(this.SelectedSlot)
             .get()
-            .then(function(querySnapshot){
-                if (querySnapshot.size != 0){
-                    alert ("you can only queue for one restaurant at a time!")
-                }   else{
-                    db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueInfo").doc(vm.SelectedSlot)
-                    .get()
-                    .then((Snapshot) =>{
-                        const NewNumber = Snapshot.data().Issued +=1;
-                        db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueInfo").doc(vm.SelectedSlot).update({
-                            Issued: firebase.firestore.FieldValue.increment(1),
-                            Waiting: firebase.firestore.FieldValue.increment(1),
-                        });
-                        db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueRecord").add({
-                            Contact: vm.UserInput,
-                            Identifier: vm.SelectedSlot,
-                            QueueNumber: NewNumber,
-                            Status: "Processing",
-                        })
-                        alert("your Number is" + NewNumber)
-                    })
-                    .catch(function(error) {
-                        console.log("Error getting documents: ", error);
-                    })          
-                    }
+            .then((Snapshot) =>{
+                const QueueIssued = Snapshot.data().Issued
+                db.collection("Restaurant").doc(this.RestaurantId).collection("QueueSetting").doc(this.SelectedSlot)
+                .get()
+                .then((Snapshot)=>{
+                    const QueueLimit = Snapshot.data().QueueLimit
+                    console.log(QueueLimit+ "and"+ QueueIssued )
+                        if (QueueIssued < QueueLimit){
+                            var vm = this;
+                            db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueRecord")
+                            .where("Contact", "==", vm.UserInput).where("Status", "==", "Processing")
+                            .get()
+                            .then(function(querySnapshot){
+                                if (querySnapshot.size != 0){
+                                    alert ("you can only queue for one slot at a time")
+                                }   else{
+                                        db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueInfo").doc(vm.SelectedSlot)
+                                        .get()
+                                        .then((Snapshot) =>{
+                                            const NewNumber = Snapshot.data().Issued +=1;
+                                            db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueInfo").doc(vm.SelectedSlot).update({
+                                                Issued: firebase.firestore.FieldValue.increment(1),
+                                                Waiting: firebase.firestore.FieldValue.increment(1),
+                                            });
+                                            db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueRecord").add({
+                                                Contact: vm.UserInput,
+                                                Identifier: vm.SelectedSlot,
+                                                QueueNumber: NewNumber,
+                                                Status: "Processing",
+                                            })
+                                            alert("your Number is" + NewNumber)
+                                        })
+                                         .catch(function(error) {
+                                            console.log("Error getting documents: ", error);
+                                        })          
+                                    }
+                            })
+                        } else {
+                            alert ("Queue Limit Exceeded")
+                        }
                 })
+            }),
             this.dialog = false
-        }
+        },
+        CloseDialog(){
+            this.dialog = false
+        },
+
     },
 }
 </script>

@@ -1,8 +1,9 @@
 <template>
 <div data-app> 
-<QueueDisplay v-bind:RestaurantId = "RestaurantId" />
-<GetTicketBtn v-bind:RestaurantId = "RestaurantId"/>
-<CheckQueueNumber v-bind:RestaurantId = "RestaurantId"/>
+<QueueDisplay :RestaurantId = "RestaurantId" />
+<GetTicketBtn :RestaurantId = "RestaurantId"/>
+<CheckQueueNumber :RestaurantId = "RestaurantId"/>
+<ShowMenu :RestaurantId = "RestaurantId"/>
 </div>
 </template>
 
@@ -11,6 +12,7 @@
 import QueueDisplay from '../components/QueueDisplay'
 import GetTicketBtn from '../components/GetTicketBtn'
 import CheckQueueNumber from '../components/CheckQueueNumber'
+import ShowMenu from '../components/ShowMenu'
 
 export default {
   name: "RestaurantPage",
@@ -18,6 +20,7 @@ export default {
     QueueDisplay,
     GetTicketBtn,
     CheckQueueNumber,
+    ShowMenu
   },
   data(){
     return{

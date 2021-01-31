@@ -1,19 +1,28 @@
 <template>
-  <div>
+<div class="HomePage" style="background-image: url('https://media.giphy.com/media/oNTQZNB67kMf5VHiCj/giphy.gif'); background-size: 100% 100%;">
     <ToRestaurantPage/>
-    <ToLogin/>
-  </div>
+</div>
 </template>
 
 <script>
 import ToRestaurantPage from '../components/ToRestaurantPage'
-import ToLogin from '../components/ToLogin'
 
 export default {
-    name: "MainPage",
+    name: "HomePage",
     components:{
       ToRestaurantPage,
-      ToLogin
+    },
+    data(){
+      return{
+         
+      }
     }
   }
 </script>
+<style>
+.HomePage{
+  display: flex;
+  justify-content: center;
+}
+
+</style>

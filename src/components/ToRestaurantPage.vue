@@ -1,30 +1,33 @@
 <template>
-    <v-app>
-  <v-app-bar
-  app
-  color=blue
-  >
-    <span
-    style="margin: auto">
-    DonQ
-    </span>
-  </v-app-bar>
+<div class="ToRestaurantPage">
   <v-main>
-    <v-text-field
-    label="Enter RestaurantId Here"
-    :rules="rules"
-    hide-details="auto"
-    v-model="UserInput"
-    >
-    </v-text-field>
-    <v-btn
-    rounded
-    color="primary"
-    @click="ToRestaurantPage">
-    Go
-    </v-btn>
+    <v-img :src="Logo" style="width: 150px; height:100px; display: inline-block;"></v-img>
+    <v-container>
+      <v-text-field
+      label="Restaurant ID"
+      hide-details="auto"
+      v-model="UserInput"
+      outlined
+      type="number"
+      ></v-text-field>
+      <br>
+      <v-btn
+      depressed
+      color="primary"
+      @click="ToRestaurantPage"
+      block>
+      Enter
+      </v-btn>
+    </v-container>
   </v-main>
-</v-app>
+  <v-container class="footer">
+      <h4>Join us here!<br>
+      <router-link :to="'LoginPage'">Login</router-link>
+      ||
+      <router-link :to="'RegisterPage'">Register</router-link>
+      </h4>
+  </v-container>
+</div>
 
 </template>
 
@@ -33,14 +36,8 @@ export default {
     name: "ToRestaurantPage",
     props: ['RestaurantId'],
     data: () => ({
-      rules: [
-        value => !!value || 'Required.',
-        value => {
-          const pattern = /^[0-9]\d*$|^$/
-          return pattern.test(value) || 'Numbers Only'
-        }
-      ],
       UserInput:"",
+      Logo: require('../assets/logo.png')
     }),
     methods: {
       ToRestaurantPage(){
@@ -49,3 +46,21 @@ export default {
     }
   }
 </script>
+<style>
+.ToRestaurantPage{
+  width: 75%;
+  max-width: 400px
+}
+.v-main{
+  height:90vh;
+  display:flex;
+  align-items: center;
+  text-align: center
+}
+.footer{
+  height:10vh;
+  display: flex;
+  justify-content: center;
+}
+
+</style>

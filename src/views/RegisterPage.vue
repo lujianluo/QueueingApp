@@ -1,32 +1,36 @@
 <template>
     <div class="Register" style="background-image: url('https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80'); background-size: 100% 100%;">
-        <v-form>
-            <v-img :src="Logo" style="width: 150px; height:100px; display: inline-block;"></v-img>
-            <v-text-field
-                v-model="email"
-                :rules="emailRules"
-                label="E-mail"
-                required
-            ></v-text-field>
-            <v-text-field
-                v-model="password"
-                label="Password"
-                required
-            ></v-text-field>
-            <v-text-field
-                v-model="name"
-                label="RestaurantName"
-                required
-            ></v-text-field>
-            <v-btn
-            color="success"
-            @click="submit"
-            >
-                Register
-            </v-btn>
-            <br>
-            <router-link to="RegisterPage">Already have an account? Login Here!</router-link>
-        </v-form>   
+        <div class="RegisterMain">
+            <v-main>
+                <v-form>
+                    <v-img :src="Logo" style="width: 150px; height:100px; display: inline-block;"></v-img>
+                    <v-text-field
+                        v-model="email"
+                        :rules="emailRules"
+                        label="E-mail"
+                        required
+                    ></v-text-field>
+                    <v-text-field
+                        v-model="password"
+                        label="Password"
+                        required
+                    ></v-text-field>
+                    <v-text-field
+                        v-model="name"
+                        label="RestaurantName"
+                        required
+                    ></v-text-field>
+                    <v-btn
+                    color="success"
+                    @click="submit"
+                    >
+                        Register
+                    </v-btn>
+                    <br>
+                    <router-link to="RegisterPage">Already have an account? Login Here!</router-link>
+                </v-form>   
+            </v-main>
+        </div>
     </div>
 </template>
 
@@ -120,7 +124,7 @@ export default {
     justify-content: center;
     height: 100vh;
 }
-.v-form{
-    width: 70%
+.RegisterMain{
+    width:75%
 }
 </style>

@@ -11,29 +11,29 @@
     <div v-for="Slot in Slots" :key="Slot.Name">
       <v-container class="DisplayContainer">
           <v-card class="ReuseableCard" max-height="15vh">
-                <v-list>
-                  <div v-for="id in QueueSetting" :key="id.id">
-                    <div v-if="id.Identifier == Slot">
-                      <v-list-item-title>
-                      {{Slot}} ---- {{id.MinPax}} - {{id.MaxPax}} Pax
-                      </v-list-item-title>
-                    </div>
-                  </div>
-                <div v-for="doc in QueueInfo" :key="doc.id">
-                  <div v-if="doc.Identifier == Slot">
-                    <v-list-item-subtitle>
-                      Now Serving: {{doc.Current}}
-                      <br>
-                      Numbers of Waiting: {{doc.Waiting}}
-                    </v-list-item-subtitle>
-                  </div>
+            <v-list>
+              <div v-for="id in QueueSetting" :key="id.id">
+                <div v-if="id.Identifier == Slot">
+                  <v-list-item-title>
+                    {{Slot}} ---- {{id.MinPax}} - {{id.MaxPax}} Pax
+                  </v-list-item-title>
                 </div>
-                </v-list>
+              </div>
+
+              <div v-for="doc in QueueInfo" :key="doc.id">
+                <div v-if="doc.Identifier == Slot">
+                  <v-list-item-subtitle>
+                    Now Serving: {{doc.Current}}
+                    <br>
+                    Numbers of Waiting: {{doc.Waiting}}
+                  </v-list-item-subtitle>
+                </div>
+              </div>
+            </v-list>
           </v-card>
         </v-container>
     </div>
   </div>
-  
 </template>
 
 <script>
@@ -114,9 +114,9 @@ export default {
   height: 15vh;
 }
 .ReuseableCard{
-  position: relative;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
+  display: table-cell;
+  vertical-align: middle;
   min-width: 250px;
 }
 

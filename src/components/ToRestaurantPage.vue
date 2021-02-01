@@ -1,6 +1,6 @@
 <template>
 <div class="ToRestaurantPage">
-  <v-main>
+  <v-main class="RestaurantMain">
     <v-img :src="Logo" style="width: 150px; height:100px; display: inline-block;"></v-img>
     <v-container>
       <v-text-field
@@ -51,7 +51,7 @@ export default {
   width: 75%;
   max-width: 400px
 }
-.v-main{
+.RestaurantMain{
   height:90vh;
   display:flex;
   align-items: center;

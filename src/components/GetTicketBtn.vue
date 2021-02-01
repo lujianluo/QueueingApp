@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="GetTicketBtn">
         <v-row justify="center">
             <v-dialog v-model="dialog" persistent max-width="290">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn outlined color="primary" v-bind="attrs" v-on="on">
+                    <v-btn outlined color="error" v-bind="attrs" v-on="on">
                         Queue Here!
                     </v-btn>
                 </template>
@@ -115,3 +115,11 @@ export default {
     },
 }
 </script>
+<style>
+.GetTicketBtn{
+    height:10vh;
+      display: flex;
+  align-items: center;
+  justify-content: center;
+}
+</style>

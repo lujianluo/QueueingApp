@@ -1,6 +1,7 @@
 <template>
-    <div id='app'>
+    <div class="Login" style="background-image: url('https://images.unsplash.com/photo-1531685250784-7569952593d2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1867&q=80'); background-size: 100% 100%;">
         <v-form>
+            <v-img :src="Logo" style="width: 150px; height:100px; display: inline-block;"></v-img>
             <v-text-field
                 v-model="email"
                 :rules="emailRules"
@@ -18,6 +19,8 @@
             >
                 Login
             </v-btn>
+            <br>
+            <router-link to="RegisterPage">Do not have an account? Register Here!</router-link>
         </v-form>        
     </div>
 </template>
@@ -34,6 +37,7 @@ export default {
                 v => !!v || 'E-mail is required',
                 v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
             ],
+            Logo: require('../assets/logo.png')
         }
     },
     methods:{
@@ -52,3 +56,11 @@ export default {
     }
 }
 </script>
+<style>
+.Login{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+</style>

@@ -1,7 +1,7 @@
 <template>
-<div class="HomePage" style="background-image: url('https://media.giphy.com/media/oNTQZNB67kMf5VHiCj/giphy.gif'); background-size: 100% 100%;">
+  <div class="HomePage" style="background-image: url('https://media.giphy.com/media/oNTQZNB67kMf5VHiCj/giphy.gif'); background-size: 100% 100%;">
     <ToRestaurantPage/>
-</div>
+  </div>
 </template>
 
 <script>

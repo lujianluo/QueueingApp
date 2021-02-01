@@ -1,31 +1,39 @@
 <template>
-  <div>
+  <div class="QueueDisplay">
+    <v-container>
+      <v-card class="mx-auto">
+        <v-card-title>
+            {{RestaurantId}} --- {{RestaurantInfo.RestaurantName}}
+        </v-card-title>
+      </v-card>
+    </v-container>
+
     <div v-for="Slot in Slots" :key="Slot.Name">
-          <v-card class="Reuseable card" elevation="11" shaped max-width="200px">
-            <v-list-item three-line>
-              <v-list-item-content>
-                <v-list-item-title>
+      <v-container class="DisplayContainer">
+          <v-card class="ReuseableCard" max-height="15vh">
+                <v-list>
                   <div v-for="id in QueueSetting" :key="id.id">
                     <div v-if="id.Identifier == Slot">
+                      <v-list-item-title>
                       {{Slot}} ---- {{id.MinPax}} - {{id.MaxPax}} Pax
+                      </v-list-item-title>
                     </div>
                   </div>
-                </v-list-item-title>
                 <div v-for="doc in QueueInfo" :key="doc.id">
                   <div v-if="doc.Identifier == Slot">
                     <v-list-item-subtitle>
                       Now Serving: {{doc.Current}}
-                    </v-list-item-subtitle>
-                    <v-list-item-subtitle>
+                      <br>
                       Numbers of Waiting: {{doc.Waiting}}
                     </v-list-item-subtitle>
                   </div>
                 </div>
-              </v-list-item-content>
-            </v-list-item>
+                </v-list>
           </v-card>
+        </v-container>
     </div>
   </div>
+  
 </template>
 
 <script>
@@ -90,3 +98,26 @@ export default {
   },
 }
 </script>
+
+<style>
+.QueueDisplay{
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+}
+.container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 15vh;
+}
+.ReuseableCard{
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  min-width: 250px;
+}
+
+</style>

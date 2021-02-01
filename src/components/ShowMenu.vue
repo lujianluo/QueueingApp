@@ -1,9 +1,9 @@
 <template>
-    <div>
+    <div class="show">
         <v-row justify="center">
             <v-dialog v-model="dialog" persistent max-width="290">
                 <template v-slot:activator="{ on, attrs }">
-                    <v-btn outlined color="primary" v-bind="attrs" v-on="on">
+                    <v-btn outlined color="normal" v-bind="attrs" v-on="on">
                         Show Menu
                     </v-btn>
                 </template>
@@ -54,3 +54,11 @@ export default {
     }
 }
 </script>
+<style>
+.show{
+    height:10vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+</style>

@@ -94,13 +94,13 @@ export default {
                         QueueLimit: 20,
                     });
                     db.collection("Restaurant").doc(NewDocId).collection("QueueSetting").doc("SlotB").set({
-                        Identifier: "SlotA",
+                        Identifier: "SlotB",
                         MinPax: 3,
                         MaxPax: 4,
                         QueueLimit: 20,
                     });
                     db.collection("Restaurant").doc(NewDocId).collection("QueueSetting").doc("SlotC").set({
-                        Identifier: "SlotA",
+                        Identifier: "SlotC",
                         MinPax: 5,
                         MaxPax: 6,
                         QueueLimit: 20,
@@ -108,10 +108,8 @@ export default {
                     db.collection("Record").doc("IdRecord").update({
                         RestaurantId: NewId
                     });
-                    this.$router.replace({ name: "SettingPage"});
-
                 })
-            
+                this.$router.replace({ name: "SettingPage"});
             })
         }
     }    

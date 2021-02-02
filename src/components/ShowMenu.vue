@@ -34,23 +34,23 @@ export default {
     },
     methods:{
         LoadRestaurantInfo(){
-      db.collection("Restaurant").where("RestaurantId", "==", parseInt(this.RestaurantId))
-      .get()
-      .then((querySnapshot) =>{
-        querySnapshot.forEach((doc)=> {
-          this.Menu = doc.data().RestaurantMenu;    
-        });
-      })
-      .catch(function(error) {
-        console.log("Error getting documents: ", error);
-      });
-    },
-    CloseDialog(){
-        this.dialog = false
-    }
+            db.collection("Restaurant").where("RestaurantId", "==", parseInt(this.RestaurantId))
+            .get()
+            .then((querySnapshot) =>{
+                querySnapshot.forEach((doc)=> {
+                this.Menu = doc.data().RestaurantMenu;    
+                });
+            })
+            .catch(function(error) {
+                console.log("Error getting documents: ", error);
+            });
+        },
+        CloseDialog(){
+            this.dialog = false
+        }
     },
     created(){
-        this.LoadRestaurantInfo();
+            this.LoadRestaurantInfo();
     }
 }
 </script>

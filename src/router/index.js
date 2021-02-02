@@ -45,6 +45,11 @@ const routes = [
     name: 'AdminPage',
     component:() => import('../views/AdminPage.vue'),
     meta: { requiresAuth: true }
+  },
+  {
+    path: '/RestaurantPage/:RestaurantId/:Contact',
+    name: 'QueueingPage',
+    component:()=> import('../views/QueueingPage.vue'),
   }
 ]
 

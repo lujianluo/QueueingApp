@@ -98,7 +98,8 @@ export default {
                                         })
                                          .catch(function(error) {
                                             console.log("Error getting documents: ", error);
-                                        })          
+                                        })
+                                        vm.$router.push({ name: 'QueueingPage', params: { RestaurantId: vm.RestaurantId, Contact:vm.UserInput}})    
                                     }
                             })
                         } else {

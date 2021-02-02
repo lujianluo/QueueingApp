@@ -105,7 +105,7 @@
                 <v-row >
                     <v-col>
                         <v-btn
-                            color="success"
+                            color="error"
                             @click="cancel"
                         >
                             Cancel

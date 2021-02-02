@@ -52,6 +52,7 @@ export default {
     },
     methods:{
         CheckQueueNumber(){
+            var vm = this;
             db.collection("Restaurant").doc(this.RestaurantId).collection("QueueRecord")
             .where("Contact", "==", this.UserInput).where("Status", "==", "Processing")
             .get()
@@ -59,9 +60,7 @@ export default {
                 if(querySnapshot.size == 0){
                     alert("no queue record founded")
                 } else {
-                    querySnapshot.forEach(function(doc) {
-                        alert ("your number is " + doc.data().QueueNumber)
-                    })
+                   vm.$router.push({ name: 'QueueingPage', params: { RestaurantId: vm.RestaurantId, Contact:vm.UserInput}})
                 }
             })
             this.dialog = false

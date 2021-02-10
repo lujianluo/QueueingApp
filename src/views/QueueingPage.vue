@@ -60,6 +60,6 @@ export default {
 </script>
 <style>
 .QueueingPage{
-    height:90vh
+    height:100vh
 }
 </style>

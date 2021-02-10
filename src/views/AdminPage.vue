@@ -1,6 +1,7 @@
 <template>
     <div>
-        <v-app-bar>
+        <v-main>
+            <v-container>
             <v-row>
                 <v-col align-self="center">
                     <v-btn color="primary" @click="toSetting">Setting</v-btn>
@@ -29,8 +30,7 @@
                     <v-btn color="error" @click="logout">Logout</v-btn>
                 </v-col>
             </v-row>
-        </v-app-bar>
-        <v-main>
+            </v-container>
             <v-container>
                 <v-simple-table>
                     <template v-slot:default>
@@ -95,7 +95,6 @@
                     </v-card-subtitle>
                    </v-img>
                 </v-card>
-
             </v-container>
         </v-main>
     </div>

@@ -22,7 +22,7 @@
                     </v-btn>
                     <v-btn 
                     text 
-                    @click="CloseDialog">
+                    @click="dialog = false">
                         Close
                     </v-btn>
                 </v-card>
@@ -65,15 +65,12 @@ export default {
             })
             this.dialog = false
         },
-        CloseDialog(){
-        this.dialog = false
-    }
     }
 }
 </script>
 <style>
 .Check{
-  height:5vh;
+  height:10vh;
   display: flex;
   align-items: center;
   justify-content: center;

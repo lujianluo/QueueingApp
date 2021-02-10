@@ -50,6 +50,11 @@ const routes = [
     path: '/RestaurantPage/:RestaurantId/:Contact',
     name: 'QueueingPage',
     component:()=> import('../views/QueueingPage.vue'),
+  },
+  {
+    path: '/FeedbackPage/:RestaurantId',
+    name: 'FeedbackPage',
+    component:()=> import('../views/FeedbackPage.vue'),
   }
 ]
 

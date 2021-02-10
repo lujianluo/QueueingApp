@@ -11,7 +11,7 @@
                     <v-img :src="Menu"></v-img>
                     <v-btn 
                     text 
-                    @click="CloseDialog">
+                    @click="dialog = false">
                         Close
                     </v-btn>
                 </v-card>
@@ -45,9 +45,6 @@ export default {
                 console.log("Error getting documents: ", error);
             });
         },
-        CloseDialog(){
-            this.dialog = false
-        }
     },
     created(){
             this.LoadRestaurantInfo();

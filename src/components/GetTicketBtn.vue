@@ -8,29 +8,31 @@
                     </v-btn>
                 </template>
                 <v-card>
-                    <v-text-field
-                        label="Enter Your PhoneNumber Here"
-                        :rules="rules"
-                        hide-details="auto"
-                        v-model="UserInput"
-                    >
-                    </v-text-field>
-                    <v-select
-                    :items="items"
-                    label="SelectSlot"
-                    solo
-                    v-model="SelectedSlot"
-                    ></v-select>
-                    <v-btn 
-                    text 
-                    @click="SubmitQueue">
-                        Submit
-                    </v-btn>
-                    <v-btn 
-                    text 
-                    @click="CloseDialog">
-                        Close
-                    </v-btn>
+                        <v-text-field
+                            label="Enter Your PhoneNumber Here"
+                            :rules="rules"
+                            hide-details="auto"
+                            v-model="UserInput"
+                        >
+                        </v-text-field>
+                        <v-select
+                        :items="items"
+                        label="SelectSlot"
+                        solo
+                        v-model="SelectedSlot"
+                        ></v-select>
+                        <v-btn 
+                        text 
+                        @click="SubmitQueue"
+                        color="primary">
+                            Submit
+                        </v-btn>
+                        <v-btn 
+                        text 
+                        @click="dialog = false"
+                        color="error">
+                            Close
+                        </v-btn>
                 </v-card>
             </v-dialog>
         </v-row>        
@@ -109,9 +111,6 @@ export default {
             }),
             this.dialog = false
         },
-        CloseDialog(){
-            this.dialog = false
-        },
 
     },
 }
@@ -119,8 +118,8 @@ export default {
 <style>
 .GetTicketBtn{
     height:10vh;
-      display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 </style>

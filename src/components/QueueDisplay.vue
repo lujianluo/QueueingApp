@@ -65,16 +65,14 @@ export default {
     },
 
     LoadQueueInfo(){
+      var vm = this
       db.collection("Restaurant").doc(this.RestaurantId).collection("QueueInfo")
-      .get()
-      .then((querySnapshot) =>{
+      .onSnapshot(function(querySnapshot) {
+        vm.QueueInfo = []
         querySnapshot.forEach((doc)=> {
-          this.QueueInfo.push(doc.data());    
+          vm.QueueInfo.push(doc.data());    
         });
       })
-      .catch(function(error) {
-        console.log("Error getting documents: ", error);
-      });
     },
 
     LoadQueueSetting(){

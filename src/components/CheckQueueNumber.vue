@@ -4,7 +4,7 @@
             <v-dialog v-model="dialog" persistent max-width="290">
                 <template v-slot:activator="{ on, attrs }">
                     <v-btn outlined color="normal" v-bind="attrs" v-on="on">
-                        Check!
+                        Check Your Queue Number
                     </v-btn>
                 </template>
                 <v-card>

@@ -2,7 +2,10 @@
     <div class="Register" style="background-image: url('https://images.unsplash.com/photo-1533035353720-f1c6a75cd8ab?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80'); background-size: 100% 100%;">
         <div class="RegisterMain">
             <v-main>
-                <v-form>
+                <v-form    
+                    ref="form"
+                    v-model="valid"
+                >
                     <v-img :src="Logo" style="width: 150px; height:100px; display: inline-block;"></v-img>
                     <v-text-field
                         v-model="email"
@@ -12,6 +15,7 @@
                     ></v-text-field>
                     <v-text-field
                         v-model="password"
+                        :rules="passwordRules"
                         label="Password"
                         required
                     ></v-text-field>
@@ -21,8 +25,9 @@
                         required
                     ></v-text-field>
                     <v-btn
-                    color="success"
+                    color="primary"
                     @click="submit"
+                    :disabled="!valid"
                     >
                         Register
                     </v-btn>
@@ -48,7 +53,12 @@ export default {
                 v => !!v || 'E-mail is required',
                 v => /.+@.+\..+/.test(v) || 'E-mail must be valid',
             ],
-            Logo: require('../assets/logo.png')
+            passwordRules:[
+                v => !!v || 'Password is required',
+                v => (v && v.length >= 6)|| 'Password must be larger than 6 characters'
+            ],
+            Logo: require('../assets/logo.png'),
+            valid: false,
         }
     },
     methods:{
@@ -109,9 +119,13 @@ export default {
                         RestaurantId: NewId
                     });
                 })
+                .catch((error) => {
+                    alert(error);
+                    this.$router.replace({name: "RegisterPage"})
+                });
                 this.$router.replace({ name: "SettingPage"});
             })
-        }
+        },
     }    
 }
 </script>

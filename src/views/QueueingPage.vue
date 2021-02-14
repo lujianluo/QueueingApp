@@ -34,6 +34,7 @@ export default {
       Contact: this.$route.params.Contact,
       QueueingSlot: "",
       QueueingNumber: "",
+      CurrentQueuing: Number,
     }
   },
     methods:{
@@ -51,10 +52,33 @@ export default {
                 .catch(function(error) {
                     console.log("Error getting document:", error);
                 })            
-        }
+        },
     },
     created(){
         this.LoadData();
+        this.$notification.requestPermission()
+        .then(console.log)
+    },
+    watch:{
+        QueueingNumber: function(){
+            var vm = this
+            db.collection("Restaurant").doc(this.RestaurantId).collection("QueueInfo").doc(this.QueueingSlot)
+            .onSnapshot(function(doc){
+                vm.CurrentQueuing = doc.data().Current
+            });
+        },
+        CurrentQueuing: function(){
+            if (this.QueueingNumber - this.CurrentQueuing < 5 && this.QueueingNumber - this.CurrentQueuing !== 0){
+                this.$notification.show('Dear Customer', {
+                    body: 'We are calling your number soon!'
+                }, {})
+            }
+            if (this.QueueingNumber == this.CurrentQueuing){
+                this.$notification.show('Dear Customer', {
+                    body: 'Your Number is Called!'
+                }, {})
+            }
+        }
     }
 }
 </script>

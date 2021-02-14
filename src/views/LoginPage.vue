@@ -54,7 +54,7 @@ export default {
                 this.$router.replace({ name: "AdminPage" });
             })
             .catch(error => {
-                this.error = error;
+                alert(error)
             });           
         }
     }

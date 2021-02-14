@@ -52,7 +52,12 @@ export default {
                 text: this.text,
                 rating: this.rating
             })
-            alert("submit successfully")
+            .then(function() {
+                alert("Document successfully written!");
+            })
+            .catch(function(error) {
+                alert(error);
+            });
         }
     }
 }

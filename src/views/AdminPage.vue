@@ -14,7 +14,18 @@
                             </v-btn>
                         </template>
                         <v-card>
-                            <qrcode-vue :value="RestaurantPageUrl" :size=250 level="H" />
+                            <v-row>
+                                <v-col>
+                                    <qrcode-vue :value="RestaurantPageUrl" :size=250 level="H" />
+                                    Save it and Print it out! <br>
+                                    Show to your customer for <h3 style="color:red">getting ticket!</h3>
+                                </v-col>
+                                <v-col>
+                                    <qrcode-vue :value="FeedbackPageUrl" :size=250 level="H" />
+                                    Save it and Print it out! <br>
+                                    Show to your customer for <h3 style="color:red">feedback gathering!</h3>
+                                </v-col>
+                            </v-row>
                             <v-btn 
                             text 
                             @click="CloseDialog">
@@ -31,6 +42,7 @@
                 </v-col>
             </v-row>
             </v-container>
+            <br>
             <v-container>
                 <v-simple-table>
                     <template v-slot:default>
@@ -64,9 +76,13 @@
                     </template>
                 </v-simple-table>
             </v-container>
+            <br>
             <v-container>
                 <v-row justify="center" style="min-height:50px">
-                    <h3>Call a Number</h3>
+                    <h2>Call a Number</h2>
+                </v-row>
+                <v-row justify="center" style="min-height:50px">
+                    <h4 style="color:red">Click on the corresponding Slot to call a ticket</h4>
                 </v-row>
                 <v-row justify="space-between">
                     <div v-for="slot in Slots" :key="slot.name">
@@ -76,11 +92,12 @@
                     </div>
                 </v-row>
             </v-container>
+            <br>
             <v-container>
                 <v-row justify="center" style="min-height:50px">
-                    <h4>Now Calling</h4>
+                    <h2>Now Calling</h2>
                 </v-row>
-
+                <br>
                 <v-card>
                    <v-img
                         height="200px"
@@ -159,8 +176,10 @@ export default {
             db.collection("Restaurant").doc(this.RestaurantId).collection("QueueInfo").doc(slot)
             .get()
             .then((Snapshot) => {
-                const curNum = Snapshot.data().Current
-                console.log(" current"+curNum)
+                const curNum = Snapshot.data().Current +=1;
+                const WaitNum = Snapshot.data().Waiting
+                console.log(" current"+curNum + "waiting" + WaitNum)
+                if (WaitNum > 0){
                 var vm = this;
                 db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueRecord")
                 .where("Identifier", "==", slot)
@@ -178,11 +197,14 @@ export default {
                 .catch(function(error) {
                     console.log("Error getting document:", error);
                 })
+                vm.updateRecord(slot)
+                } else {
+                    alert ("There is no Queueing ticket to call")
+                }
             })
             .catch(function(error) {
                 console.log("Error getting document:", error);
             })
-            this.updateRecord(slot )
 
         },
         updateRecord(slot){
@@ -230,6 +252,9 @@ export default {
     computed: {
         RestaurantPageUrl: function () {
             return  'http://localhost:8080/#/RestaurantPage/' + this.RestaurantId
+        },
+        FeedbackPageUrl: function () {
+            return  'http://localhost:8080/#/FeedbackPage/' + this.RestaurantId
         }
   }
 }

@@ -67,13 +67,12 @@ export default {
              db.collection("Restaurant").doc(this.RestaurantId).collection("QueueInfo").doc(this.SelectedSlot)
             .get()
             .then((Snapshot) =>{
-                const QueueIssued = Snapshot.data().Issued
+                const QueueWaiting = Snapshot.data().Waiting
                 db.collection("Restaurant").doc(this.RestaurantId).collection("QueueSetting").doc(this.SelectedSlot)
                 .get()
                 .then((Snapshot)=>{
                     const QueueLimit = Snapshot.data().QueueLimit
-                    console.log(QueueLimit+ "and"+ QueueIssued )
-                        if (QueueIssued < QueueLimit){
+                        if (QueueWaiting < QueueLimit){
                             var vm = this;
                             db.collection("Restaurant").doc(vm.RestaurantId).collection("QueueRecord")
                             .where("Contact", "==", vm.UserInput).where("Status", "==", "Processing")
